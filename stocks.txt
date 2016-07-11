@@ -1,0 +1,3 @@
+stock name no of shares shareprice total
+vamsi		10	 10	    100
+vmk		5        5          25	
