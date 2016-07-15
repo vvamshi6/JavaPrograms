@@ -1,0 +1,17 @@
+[
+{
+"name":"rice",
+"weight(kg)":"4",
+"priceperkg":"40"
+},
+{
+"name":"wheat",
+"weight(kg)":"2",
+"priceperkg":"45"
+},
+{
+"name":"pulses",
+"weight(kg)":"1",
+"priceperkg":"50"
+}
+]
