@@ -139,6 +139,21 @@ public class Utility{
 		}
 	}	
 
+	public int[] insertionSort(int[] list) {
+  	for (int i = 1; i < list.length; i++) {
+     	int next = list[i];
+   		// find the insertion location while moving all larger element up
+      int j = i;
+      while (j > 0 && list[j - 1] > next) {
+  	    list[j] = list[j - 1];
+  	    j--;
+      }
+      // insert the element
+      list[j] = next;
+    }
+        return list;
+  }
+/*
 		//Insertion Sort for Numbers
 		public int[] insertionSort(int[] array){
 			//declaring a key variable
@@ -157,7 +172,7 @@ public class Utility{
 			}
 			return array;
 		}
-
+*/
 		//Insertion Sort for Strings
      public String[] insertionSort(String[] array)
      {
@@ -253,16 +268,14 @@ public class Utility{
 	}
 
 	//writing node data to the file
-	/*public  void writeNodeToFile(Node node){
+	public  void writeNodeToFile(Node node){
 		try{	
 		String ndata = "";
-		System.out.println("Enter a file Name");
-		String name = inputString();
-		FileWriter fw = new FileWriter(name);
+		FileWriter fw = new FileWriter("UnOrdered.txt");
 		while(node != null){
               	ndata += (String)node.getData();
 		ndata +=" ";
-              	node=node.right;
+              	node=node.link;
             	}
 			fw.write(ndata);
 			fw.close();
@@ -271,7 +284,7 @@ public class Utility{
 			System.out.println(ioe);		
 		}
 		System.out.println("data written to file successfully");	
-	}*/
+	}
 
 	//converting string values into integer and then storing in array
 	public int[] convertStringtoInt(String[] nStrings){
@@ -283,3 +296,4 @@ public class Utility{
 		return nums;
 	}
 }
+

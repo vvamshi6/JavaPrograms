@@ -1,159 +1,126 @@
 package com.bridgelabz;
 /*
 * created by: Bridge Labz
-* Date 06/07/2016
-* Purpose:Read the Text from a file, split it into words and arrange it as Linked List. Take a user input to search a Word in the List. If the Word is not found then add it to the list, and if it found then remove the word from the List. In the end save the list into a file
+* Date 09/07/2016
+* Purpose: Read a List of Numbers from a file and arrange it ascending Order in a Linked List. Take user input for a number, if found then pop the number out of the list else insert the number in appropriate position
 */
-
 import com.bridgelabz.Utility;
 public class UnOrderedList{
-	//creating node type variables
-	static Node start,prev,current;
-	static Utility u=new Utility();
-	static UnOrderedList uol=new UnOrderedList();	 
-	//main method
+	static Utility u = new Utility();
+	static Node<String> start,end;
+	static int size;
 	public static void main(String[] args){
-		//READING FILE NAME FROM USER
-		System.out.println("Enter file name to read text");
-		String filename=u.inputString();
-		//read data from file
-		String  text   =u.readFile(filename);
-		//Creating words by splitting based on space		
-		String[] words=text.split(" ");
-		//Displaying words
-		uol.addWordsToLinkList(words);
-		//printing the linked list
-		uol.printLinkList(start);
-		//finding the word
-		System.out.println("Enter word u want to find");
-		String word1=u.inputString();
-		//calling the method		
-		Boolean option=uol.findWordFromList(word1);
-		System.out.println(option);
-		//adding word to the list if it not found
-		if(option==false){
-			uol.addNode(word1);
+		//display prompt and take user input
+		System.out.println("Enter the file Name to read text");
+		String fileName = u.inputString();
+		String fileData = u.readFile(fileName);
+		fileData = fileData.trim();
+		String[] words = fileData.split(" ");
+		u.print1DStringArray(words);
+		
+		//adding words to linked list
+		for(int i = 0;i < words.length;i++){
+			add(words[i]);
 		}
-		//removing word from the node if it found
+		
+		//display the linked list
+		display();
+		
+		//taking a word from user to search in the list
+		System.out.println("Enter a word to search in the list");
+		String word = u.inputString();
+		boolean option = search(word);
+		
+		//if the word finds then we delete it
 		if(option){
-			uol.delete(word1);
-			uol.printLinkList(start);		
+			delete(word);		
 		}
-		//finding the size of the Node
-		int len=uol.size();
-		System.out.println("Length of the List is"+len);
-		//writing data to file
+		//else we add that word to the list
+		else{
+			add(word);		
+		}		
+		display();
 		u.writeNodeToFile(start);
 	}
-	//putting words in List
-	public void addWordsToLinkList(String[] words){
-		//creating a node temp
-		Node temp;
-		Node last=new Node();
-		for(int i=0;i<words.length;i++){
-			//creating a temporary node and adding it to the temp
-			temp=new Node(words[i]);
-			//adding the node to start if it is empty
-			if(start==null){
-				start=temp;
-				last=start;
-			}
-			//adding temp node to last and moving last 
-			else{
-				last.right=temp;
-				last=last.right;
-			}
-		}
-	}
-	//Print Link List
-	public void printLinkList(Node last){
-		//display message when link list is empty
-		if(start==null)
-			System.out.println("Link list is empty.");
-		else{
-	//travesing through the list and printing data
-			last=start;
-			while(last.right!=null){
-				System.out.print(last.getData()+" ");
-				last=last.right;
-			}
-			System.out.print(last.getData());
-			System.out.println();
-		}
-	}
-	//find word from the list (if words found then it return true else it return fasle)
-	public Boolean findWordFromList(String key){
-		String last;
-		//if start is null then linked list is empty		
-		if(start==null){
-			return false;
-		}
-		// storing start node in prev and current
-		else{		
-			current=start;
-			prev=start;
-			//traversing through the linked list
-			while(current.right!=null){
-				//comparing node data with key
-				if(current.getData().equals(key)){
-				return true;
-				}
-				else{
-					//changing node to next node
-					prev=current;
-					current=current.right;						
-				}	
-			}//retrieving last value in the linked list
-				last=(String)current.getData();
-				last=last.trim();
-				if(last.equals(key)){
-				return true;
-				}			
-			return false;	
-		}
 	
+	//add method to add linked list
+	public static void add(String val){
+		Node<String> nptr = new Node<String>(val,null);    
+    size++ ;    
+    if(start == null){
+    	start = nptr;
+      end = start;
+    }
+    else{
+ 	  	end.setLink(nptr);
+     	end = nptr;
+    }
+  }
+
+	//method to find out the size of the linked list		    
+	public int getSize(){
+  	return size;
+  }
+
+	//method to display the linked list    
+	public static void display(){
+		System.out.println();
+  	System.out.print("Single Linked List\n");
+    if(size == 0){
+      System.out.print("empty\n");
+      return;
+    }    
+    if (start.getLink() == null){
+    	System.out.println(start.getData() );
+      return;
+    }
+    Node<String> ptr = start;        
+		System.out.print(start.getData()+ "->");
+    ptr = start.getLink();
+    while (ptr.getLink() != null){
+    	System.out.print(ptr.getData()+ "->");
+      ptr = ptr.getLink();
+    }
+    System.out.print(ptr.getData()+ "\n");
 	}
-//Adding node to the List
-	public void addNode(String word){
-		Node temp=new Node(word);
-		//adding temp node to the start node if it is empty
-		if(start==null){
-			start=temp;
-		}
-		//storing start value
-		else{
-		prev=start;
-		//traversing through the linked list
-		while((prev.right)!=null){
-			prev=prev.right;		
-		}
-		prev.right=temp;
-		//printing linked list 
-		printLinkList(start);
-		}
+	
+	//method to search
+	public static boolean search(String value){
+    Node<String> temp=start;
+    if(temp==null)
+       return false;
+    while(temp!=null)
+    {
+      if(value.equals(temp.getData()))
+      {
+        return true;
+      }
+      temp=temp.getLink();
+    }
+    return false;
+  }
+
+	//method to delete
+	public static void delete(String data){
+  	Node<String> temp = start;
+  	Node<String> previous = start;
+   	Node<String> head = null;
+   	if(temp == null){
+     System.out.println("List is empty");
+   	}
+   	else{
+    	while(!data.equals(temp.getData())){
+        previous = temp; 
+        temp = temp.getLink();
+     	}
+     	if(temp == start){
+       	start = start.getLink();
+       	temp.setLink(null);
+     	}
+     	else{   
+        previous.setLink(temp.getLink());
+       	temp.setLink(null);
+     	}
+   	}
 	}
-//size of the method
-	public int size(){
-		Node prev;int count=0;
-		prev=start;
-		//traversing through the linked list
-		while(prev.right!=null){
-		//counting the value
-		count++;
-		prev=prev.right;
-		}
-		return count;	
-	}
-//deleting node from the list
-	public void delete(String key){
-		//deleting the node if it is first
-		if(start==prev)
-			start=(prev.right);
-		//deleting the node if it is last
-		if((prev.right).right==null)
-			prev.right=null;
-		//deleting the other nodes
-		else
-			prev.right=(prev.right.right);
-		}
 }
