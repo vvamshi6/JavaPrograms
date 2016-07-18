@@ -49,15 +49,19 @@ public class Hash{
 		System.out.println(option);
 		if(option){
 			order[rem].delete(num);
-			if(order[rem] == null){
-			}		
+			
 		}
 		
 			for(int i=0;i<11;i++){
 				System.out.println("========================");
     		System.out.println(i+" ");
+				if(order[rem] == null){
+				order[rem] = null;
+			}		
     	  if(order[i] !=null){
+					if(order[rem]!=null)
     	  	order[i].display();
+					System.out.println();
     	  }
    		}
 		
