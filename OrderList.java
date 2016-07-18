@@ -66,18 +66,20 @@ public class OrderList{
       System.out.print("empty\n");
       return;
     }    
-    if (start.getLink() == null){
+   /* if (start.getLink() == null){
     	System.out.println(start.getData() );
       return;
-    }
+    }*/
     Node<Integer> ptr = start;        
-		System.out.print(start.getData()+ "->");
-    ptr = start.getLink();
-    while (ptr.getLink() != null){
+		//System.out.print(start.getData()+ "->");
+    //ptr = start.getLink();
+    while (ptr!= null){
     	System.out.print(ptr.getData()+ "->");
       ptr = ptr.getLink();
+
     }
-    System.out.print(ptr.getData()+ "\n");
+					System.out.println();
+   // System.out.print(ptr.getData()+ "\n");
 	}
 	public  boolean search(int srch){
 		    
