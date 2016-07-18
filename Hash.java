@@ -2,8 +2,8 @@ package com.bridgelabz;
 import com.bridgelabz.Utility;
 import java.util.Arrays;
 public class Hash{
-	LinkedList[] order = new LinkedList[11];
-	public  Hash(){
+	static OrderList[] order = new OrderList[11];
+	public Hash(){
 		//Utility class Object
 		Utility u = new Utility();
 
@@ -19,13 +19,13 @@ public class Hash{
     for(int i=0; i<nums.length; i++){
     	int rem = nums[i]%11;
       if(order[rem]== null){
-      	order[rem] = new LinkedList();
-        order[rem].add(nums[i]);
+      	order[rem] = new OrderList();
+        order[rem].insertInOrder(nums[i]);
       }
       else
-      	order [rem].add(nums[i]);
+      	order[rem].insertInOrder(nums[i]);
     }        
-		//System.out.println(Arrays.toString(order[rem]));
+		
 		for(int i=0;i<11;i++){
 			System.out.println("========================");
     	System.out.println(i+" ");
@@ -34,9 +34,33 @@ public class Hash{
       }
    	}
 	}
-	
+		
 	public static void main(String[] args){
+		Utility u = new Utility();		
 		Hash h = new Hash();
+		System.out.println("Enter a number to search");
+		int num = u.inputNumber();
+		int rem = num % 11;
+		boolean option = false;
+		if(order[rem] != null){
+			OrderList temp = order[rem];
+			option = temp.search(num);			
+		}
+		System.out.println(option);
+		if(option){
+			order[rem].delete(num);
+			if(order[rem] == null){
+			}		
+		}
+		
+			for(int i=0;i<11;i++){
+				System.out.println("========================");
+    		System.out.println(i+" ");
+    	  if(order[i] !=null){
+    	  	order[i].display();
+    	  }
+   		}
+		
 	}
 }	
 
