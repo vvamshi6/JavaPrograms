@@ -48,10 +48,17 @@ public class Hash{
 		}
 		System.out.println(option);
 		if(option){
-			order[rem].delete(num);
-			
+			order[rem].delete(num);		
 		}
-		
+		else{
+			if(order[rem] == null){
+				order[rem] = new OrderList();
+				order[rem].insertInOrder(num);			
+			}
+			else{
+				order[rem].insertInOrder(num);			
+			}		
+		}
 			for(int i=0;i<11;i++){
 				System.out.println("========================");
     		System.out.println(i+" ");
