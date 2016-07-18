@@ -20,34 +20,36 @@ public class Regex{
 		String fullName = u.inputString(); 
 
 		System.out.println("Enter your Mobile Number");
-		String mobileNo = u.inputString();
+		long mobile = u.inputLong();
+		
+		String mobileNo = String.valueOf(mobile);
 
-		//getting regular expression from file
+		//getting regular data  from file
 		String message = u.readFile("Details.txt");
 		
 		//assigning based on regular expression		
-		Pattern pattern = Pattern.compile("<<name>>");
+		Pattern pattern = Pattern.compile("<<[a-z]{4}>>");
 		Matcher matcher = pattern.matcher(message);
 		message = matcher.replaceAll(surName);
 		
-		Pattern pattern2 = Pattern.compile("<<full name>>");
+		Pattern pattern2 = Pattern.compile("<<[a-z]{4}[ ][a-z]{4}>>");
 		matcher = pattern2.matcher(message);
 		message = matcher.replaceAll(fullName);
 		
-		Pattern p3 = Pattern.compile("xxxxxxxxxx");
+		Pattern p3 = Pattern.compile("[x]{10}");
 		matcher = p3.matcher(message);
 		message = matcher.replaceAll(mobileNo);
 		
 		//date class conversion to simple date format
 		Date d  = new Date();
-		System.out.println(d);
+		//System.out.println(d);
 		java.text.SimpleDateFormat date = new java.text.SimpleDateFormat("dd/MM/YYYY");
 		String strDate = date.format(d);
 		System.out.println(strDate);		
 		boolean found = false;
 		
 		//adding date to the matcher
-		Pattern p4 = Pattern.compile("01/01/2016");
+		Pattern p4 = Pattern.compile("\\d{2}\\/\\d{2}\\/\\d{4}");
 		matcher = p4.matcher(message);
 		message = matcher.replaceAll(strDate);
 		
