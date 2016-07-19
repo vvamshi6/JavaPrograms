@@ -42,6 +42,5 @@ public class StopWatch{
 		//elapsed time
 		long elapsed = s.elapsedTime();
 		System.out.println((s.elapsed/1000)+"secs");
-		int no = u.binarySearch()
 	}
 }

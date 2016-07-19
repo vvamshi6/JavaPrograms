@@ -9,15 +9,19 @@ public class SumofTriplets{
 	public static void main(String[] args){
 		Utility u = new Utility();
 		SumofTriplets s = new SumofTriplets();
+
 		//display prompt and take input from user
 		System.out.println("Enter how many number of elements to store array");
 		int number = u.inputNumber();
+
 		//taking array values as input
 		System.out.println("Enter elements into array");
 		int[] array = u.input1DArray(number);
+
 		//displaying array values
 		u.print1DArray(array);
 		System.out.println();
+
 		//counting no of triplets
 		int count = s.findTriplets(array);
 		System.out.println(count+"Triplets are found");
@@ -41,5 +45,4 @@ public class SumofTriplets{
 		//returning the count no of consecutives
 		return count;
 	}
-
 }

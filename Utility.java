@@ -26,7 +26,7 @@ public class Utility{
 		}	
 		return "  ";
    }
-
+	
 	//reading number value	
 	public int inputNumber(){
 		try{
@@ -37,7 +37,17 @@ public class Utility{
 		}
 		return 0;
 	}
-
+	
+	//reading long value
+	public long inputLong(){
+		try{
+			return Long.parseLong(br.readLine());		
+		}
+		catch(Exception e){	
+			System.out.println(e);
+		}
+		return 0L;
+	}
 	//reading double value
 	public double inputDouble(){
 		try{

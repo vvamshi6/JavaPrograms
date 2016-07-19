@@ -10,19 +10,24 @@ public class BinarySearch{
 	static Utility u = new Utility();
 	public static void main(String [] args){
 		BinarySearch bs = new BinarySearch();
+
 		//number of words into the array
 		System.out.println("Enter how many words you want to store");
 		int number = u.inputNumber();
 		String[] words1 = u.input1DStringArray(number);
 		String[] words = u.insertionSort(words1);
+	
 		//displaying array
 		u.print1DStringArray(words);
+
 		//searching for the element we want	
 		System.out.println("Enter the element you want to find");
 		String key = u.inputString();		
+
 		//searching the element by using binary search
 		int value = u.binarySearch(words,key);
 		System.out.println("Value is"+value);
+
 		//if the value is found
 		if(value >= 0){
 			System.out.println("String is found at "+value+" position "+words[value]);
@@ -37,13 +42,16 @@ public class BinarySearch{
 			bs.binarySearchNumbers();		
 		}
 	}
+
 	//binary search method for numbers
 	public void binarySearchNumbers(){
 		System.out.println("Enter how many elements u want for int array");
 		int size = u.inputNumber();
 		int[] nums = u.input1DArray(size);
+
 		System.out.println("Enter the element you want to find");
 		u.print1DArray(nums);
+
 		int no = u.inputNumber();
 		int position = u.binarySearch(nums,no);
 		System.out.println("Position is "+position);

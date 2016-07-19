@@ -9,15 +9,15 @@ public class Gambler{
 	public static void main(String [] args){
 		Utility u = new Utility();
 		Gambler g = new Gambler();
+
 		//display prompt and take input from user
 		System.out.println("Enter your Stake");
-		//display prompt and take input from user
 		int stake = u.inputNumber();
 		System.out.println("Enter your Goal");
-		//display prompt and take input from user
 		int goal = u.inputNumber();
 		System.out.println("Enter How many times you want to play");
 		double noOfTimes = u.inputDouble();
+
 		//Calling method findGambler
 		g.findGambler(stake,goal,noOfTimes);
 	}

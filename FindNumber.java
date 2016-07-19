@@ -14,10 +14,12 @@ public class FindNumber{
 		System.out.println("Enter any number");
 		int number = u.inputNumber();
 		range = (int)Math.pow(2,number)-1;
+
 		//asking user to assume any number within the range
 		System.out.println("assume any number between 0 and"+range);
 		int count = 0;lower = 0;upper = range;middle = (lower+upper)/2;
 		option = null;
+
 		//calling binary search method
 		binarySearch(lower,upper,middle,count,option,number);
 	}

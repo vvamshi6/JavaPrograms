@@ -1,10 +1,6 @@
 package com.bridgelabz;
-/*
-* created by: Bridge Labz
-* Date 02/07/2016
-* Purpose:/*
-* created by: Bridge Labz
-* Date 08/07/2016
+/*created by: Bridge Labz
+* Date 12/07/2016
 * Purpose:Stack Class to push open parenthesis “(“ and pop closed parenthesis “)”. At the End of the Expression if the Stack is Empty then the Arithmetic Expression is Balanced. Stack Class Methods are Stack(), push(), pop(), peak(), isEmpty(), size()
 */
 import com.bridgelabz.Utility;
@@ -14,6 +10,7 @@ public class BalancedParenthesis{
 	private int maxSize;
 	char[] stack;
 	int top;
+
 	//constructor to initialize stack with given size
 	public BalancedParenthesis(int size){
 		maxSize = size;

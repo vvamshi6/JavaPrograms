@@ -4,21 +4,22 @@ package com.bridgelabz;
 * Date: 14/07/2016
 * Purpose:Linked List class having add and display methods
 */
+import java.io.*;
 import com.bridgelabz.Utility;
 public class OrderList{
-	Utility u = new Utility();
+	static Utility u = new Utility();
 	Node<Integer> start,end;
 	int size;
 	public void add(int val){
-		Node<Integer> nptr = new Node<Integer>(val,null);    
+		Node<Integer> node = new Node<Integer>(val,null);    
     size++ ;    
     if(start == null){
-    	start = nptr;
+    	start = node;
       end = start;
     }
     else{
- 	  	end.setLink(nptr);
-     	end = nptr;
+ 	  	end.setLink(node);
+     	end = node;
     }
   }
 	public void insertInOrder(int item){
@@ -26,6 +27,7 @@ public class OrderList{
 		Node<Integer> n = new Node<Integer>();
 		n.setData(item);
 		Node<Integer> temp,previous = start;
+		Node<Integer> temp1 =start;
 		temp = start;
 		if (temp == null){
 			size++;
@@ -40,40 +42,36 @@ public class OrderList{
 				while (temp.getLink() != null){
 					size++;
 					if (item <= temp.getData() && item>=previous.getData()){
-						//temp.setLink(n);
-						//n.setLink(previous);
 						n.setLink(previous.getLink());
 						previous.setLink(n);
 						check=true;
 						break;
 					}
 					else{
-					//temp=previous;
-					//previous=previous.getLink();
-					previous=temp;
-				  temp=temp.getLink();
+						previous=temp;
+				  	temp=temp.getLink();
+					}
+					if (item <= temp.getData() && item>=previous.getData()){
+						n.setLink(previous.getLink());
+						previous.setLink(n);
+						check=true;
+						break;
 					}
 				}
 				if(check==false)
-				//if(temp.getLink()==null)
-				temp.setLink(n);
+					temp.setLink(n);
+				
 			}
-		}
-	}// end of add
+		}				
+	}//end of insertInOrder()
 	public void display(){
 		System.out.println();
     if(size == 0){
       System.out.print("empty\n");
       return;
     }    
-   /* if (start.getLink() == null){
-    	System.out.println(start.getData() );
-      return;
-    }*/
     Node<Integer> ptr = start;        
-		//System.out.print(start.getData()+ "->");
-    //ptr = start.getLink();
-    while (ptr!= null){
+		while (ptr!= null){
     	System.out.print(ptr.getData()+ "->");
       ptr = ptr.getLink();
 
@@ -96,6 +94,7 @@ public class OrderList{
     }
     return false;
   }
+	
 	public void delete(int data){
   	Node<Integer> temp=start;
   	Node<Integer> previous=start;
@@ -118,4 +117,72 @@ public class OrderList{
      	}
    	}
 	}
+	public static void main(String[] args){
+		String fileData = u.readFile("numbers");
+		fileData = fileData.trim();
+		String[] numbers = fileData.split(",");
+		int[] nums = u.convertStringtoInt(numbers);
+		OrderList list = new OrderList();
+		for(int i=0;i<nums.length;i++){
+			list.insertInOrder(nums[i]);		
+		}
+		System.out.println("Choose the Option You want to perform on linked list");
+		System.out.println("1.Display");
+		System.out.println("2.Add");
+		System.out.println("3.Delete");
+		System.out.println("4.Search");
+		
+		int no;		
+		System.out.println("Enter your option");
+		int num = u.inputNumber();
+		list.display();
+		switch(num){
+			case 1:
+						System.out.println("Elements in Linked List");
+							list.display();
+						break;
+			case 2:
+						System.out.println("Enter the element u want to add");
+						no = u.inputNumber();
+						list.insertInOrder(no);
+						list.display();
+						break;
+			case 3:
+						System.out.println("Enter the no u want to delete");
+						no = u.inputNumber();
+						list.delete(no);
+						list.display();
+						break;
+			case 4:
+						System.out.println("Enter the no u want to find");
+						no = u.inputNumber();
+						boolean option = list.search(no);
+						if(option)
+							list.delete(no);
+						else
+							list.insertInOrder(no);
+						list.display();
+						break;
+			default :
+								System.out.println("option is 1 to 4");
+								break;
+		}
+
+	}
+	public void writeNodeToFile(Node<Integer> node){
+		try{	
+			FileWriter fw = new FileWriter("Ordered.txt");
+			while(node != null){
+      	Integer ndata = (Integer)node.getData();
+				fw.write(ndata);
+				fw.write(",");			
+			}
+			fw.close();
+		}
+		catch(Exception ioe){
+			System.out.println(ioe);		
+		}
+		System.out.println("data written to file successfully");	
+	}
+
 }

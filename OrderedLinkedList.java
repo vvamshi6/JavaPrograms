@@ -2,19 +2,21 @@ package com.bridgelabz;
 /*
 * created by: Bridge Labz
 * Date 11/07/2016
-* Purpose:There is 1, 2, 5, 10, 50, 100, 500 and 1000 Rs Notes which can be returned by Vending Machine. Write a Program to calculate the minimum number of Notes as well as the Notes to be returned by the Vending Machine as a Change
+* Purpose:Read a List of Numbers from a file and arrange it ascending Order in a Linked List. Take user input for a number, if found then pop the number out of the list else insert the number in appropriate position
 */
 import com.bridgelabz.Utility;
-public class OrderedList{
-	Utility u = new Utility();
-	Node<Integer> start,end;
-	int size;
+public class OrderedLinkedList{
+	static Utility u = new Utility();
+	static Node<Integer> start,end;
+	static int size;
 	public static void main(String[] args){
+		//display prompt and take input from user
 		System.out.println("Enter the file name to read Numbers");
 		String fileName = u.inputString();
+		//reading the file data
 		String fileData = u.readFile(fileName);
+		//removing start and end spaces in the file data
 		fileData = fileData.trim();
-
 		//splitting the strings based on , and storing them in a array
 		String[] snums = fileData.split(",");
 
@@ -23,12 +25,9 @@ public class OrderedList{
 		//display the array
 		u.print1DArray(nums);
 		System.out.println();
-	
-		OrderedList ol = new OrderedList();
-    ol.display();
 	}
 	//display method to display elements
-	public void display(){		
+	public static void display(){		
       //storing the start value in temp  
 		Node temp =start;
 		//iterating the loop
@@ -40,10 +39,21 @@ public class OrderedList{
     }
     System.out.println(" ");    
 	}
-	
+	public void add(int val){
+		Node<Integer> nptr = new Node<Integer>(val,null);    
+    size++ ;    
+    if(start == null){
+    	start = nptr;
+      end = start;
+    }
+    else{
+ 	  	end.setLink(nptr);
+     	end = nptr;
+    }
+  }	
 	
 	//add method to add elements in ascending order
-	public void add(int item){
+	public void insertInOrder(int item){
 		boolean check=false;
 		Node<Integer> n = new Node<Integer>();
 		n.setData(item);
@@ -70,16 +80,17 @@ public class OrderedList{
 						break;
 					}
 					else{
-						//temp=previous;
-						//previous=previous.getLink();
-						previous=temp;
-				  	temp=temp.getLink();
+					//temp=previous;
+					//previous=previous.getLink();
+					previous=temp;
+				  temp=temp.getLink();
 					}
 				}
 				if(check==false)
-					//if(temp.getLink()==null)
-					temp.setLink(n);
+				//if(temp.getLink()==null)
+				temp.setLink(n);
 			}
 		}
-	}// end of add
+	}
+	
 }

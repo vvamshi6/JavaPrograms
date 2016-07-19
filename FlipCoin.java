@@ -18,7 +18,7 @@ class FlipCoin{
 	//flip coin method for counting tails and heads
 	public void flipCoin(int number){
 		double noOfHeads = 0,noOfTails=0,noOfTosses=number;
-		for(int i = 1;i< = number;i++){	
+		for(int i = 1;i <= number;i++){	
 			double random = Math.random();
 			//if it is less than 0.5 then tails
 			if(random<0.5)

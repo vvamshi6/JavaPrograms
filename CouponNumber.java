@@ -22,8 +22,8 @@ public class CouponNumber{
 		int ran = 0;
 		//for loop for generating random numbers within range
 		for(int i = 1;i <= n;++i){
-		ran = r.nextInt(100);
-		System.out.println("coupans are: "+ran);
+			ran = r.nextInt(50);
+			System.out.println("coupans are: "+ran);
 		}
 	}
 }

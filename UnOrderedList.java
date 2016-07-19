@@ -10,10 +10,10 @@ public class UnOrderedList{
 	static Node<String> start,end;
 	static int size;
 	public static void main(String[] args){
+
 		//display prompt and take user input
-		System.out.println("Enter the file Name to read text");
-		String fileName = u.inputString();
-		String fileData = u.readFile(fileName);
+		
+		String fileData = u.readFile("vmk");
 		fileData = fileData.trim();
 		String[] words = fileData.split(" ");
 		u.print1DStringArray(words);
@@ -22,38 +22,75 @@ public class UnOrderedList{
 		for(int i = 0;i < words.length;i++){
 			add(words[i]);
 		}
+		boolean option;
+		String word1;
+			System.out.println();		
+			System.out.println("1.Display");
+			System.out.println("2.Add To LinkedList");
+			System.out.println("3.Delete From LinkedList");
+			System.out.println("4.Search From Linked List");
+		System.out.println("Enter your option");
+		int no = u.inputNumber();		
+		switch(no){
+			case 1:
+				display();
+				break;
+			case 2:
+				System.out.println("Enter element to add to list");
+				word1 = u.inputString();
+				add(word1);
+				display();
+				break;
+			case 3:
+				System.out.println("Enter the element u want to delete from list");
+				word1 = u.inputString();
+				option = search(word1);
+				if(option){
+					delete(word1);
+					System.out.println("Word is Deleted");		
+				}
+				else{
+					System.out.println("word is not in the list");				
+				}
+				
+				break;
+			case 4:
+				System.out.println("Enter a word to search in the list");
+				String word = u.inputString();
+				option = search(word);
+				if(option){
+					delete(word);		
+				}
+				//else we add that word to the list
+				else{
+					add(word);		
+				}		
+				display();
 		
-		//display the linked list
-		display();
-		
+				break;
+				default:
+				System.out.println("Number should be 1 to 4");			
+		}
+			
 		//taking a word from user to search in the list
-		System.out.println("Enter a word to search in the list");
-		String word = u.inputString();
-		boolean option = search(word);
+		
+		
 		
 		//if the word finds then we delete it
-		if(option){
-			delete(word);		
-		}
-		//else we add that word to the list
-		else{
-			add(word);		
-		}		
-		display();
 		u.writeNodeToFile(start);
 	}
 	
 	//add method to add linked list
 	public static void add(String val){
-		Node<String> nptr = new Node<String>(val,null);    
+		Node<String> node = new Node<String>(val,null);    
     size++ ;    
     if(start == null){
-    	start = nptr;
+    	start = node;
       end = start;
     }
     else{
- 	  	end.setLink(nptr);
-     	end = nptr;
+ 	  	end.setLink(node);
+     	end = node;
     }
   }
 

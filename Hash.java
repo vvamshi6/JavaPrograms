@@ -1,6 +1,6 @@
 package com.bridgelabz;
 import com.bridgelabz.Utility;
-import java.util.Arrays;
+import java.io.*;
 public class Hash{
 	static OrderList[] order = new OrderList[11];
 	public Hash(){
@@ -59,20 +59,21 @@ public class Hash{
 				order[rem].insertInOrder(num);			
 			}		
 		}
-			for(int i=0;i<11;i++){
-				System.out.println("========================");
-    		System.out.println(i+" ");
-				if(order[rem] == null){
-				order[rem] = null;
+		for(int i=0;i<11;i++){
+			System.out.println("========================");
+    	System.out.println(i+" ");
+			if(order[rem] == null){
+			order[rem] = null;
 			}		
-    	  if(order[i] !=null){
-					if(order[rem]!=null)
+    	if(order[i] !=null){
+				if(order[rem]!=null)
     	  	order[i].display();
 					System.out.println();
-    	  }
-   		}
+    	}		
+		}
 		
 	}
+		
 }	
 
 

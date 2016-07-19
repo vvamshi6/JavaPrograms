@@ -13,8 +13,14 @@ public class Hello{
 		//taking input from user
 		System.out.println("Enter user Name");
 		String name = u.inputString();
+		if(name.length()<3){
+			System.out.println("user name should have min 3 chars");
+			name = u.inputString();		
+		}
+
 		//calling user name method
 		h.userName(name);
+		
   }
 		//displaying prompt
 	public void userName(String name){		

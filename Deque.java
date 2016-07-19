@@ -1,8 +1,7 @@
 package com.bridgelabz;
 /*
 * created by: Bridge Labz
-* Date 10/07/2016
-*
+* Date 12/07/2016
 * Purpose: A palindrome is a string that reads the same forward and backward, for example, radar, toot, and madam. We would like to construct an algorithm to input a string of characters and check whether it is a palindrome.
 **/
 import com.bridgelabz.Utility;
@@ -10,7 +9,7 @@ public class Deque{
 	//Utility class Object
 	static Utility u = new Utility();
 	//Node type variable
-	Node front,rear;
+	Node<String> front,rear;
 	int size;
 	//intializing node variable
 	public Deque(){
@@ -27,47 +26,47 @@ public class Deque{
 		return size;
 	}
 	//inserting elements from front
-	public void insertAtFront(char val){
-		Node nptr = new Node(val, null);
+	public void insertAtFront(String val){
+		Node<String> node = new Node<String>(val, null);
 		size++;
 		if(front == null){
-			front = nptr;
+			front = node;
 			rear  = front;
 		}	
 		else{
-			nptr.setLink(front);
-			front = nptr;		
+			node.setLink(front);
+			front = node;		
 		}
 	}
 	//inserting the elements from rear end
-	public void insertAtRear(char val){
-		Node nptr = new Node(val,null);
+	public void insertAtRear(String val){
+		Node<String> node = new Node<String>(val,null);
 		size++;
 		if(rear == null){
-			rear = nptr;
+			rear = node;
 			front = rear;
 		}
 		else{
-			rear.setLink(nptr);
-			rear = nptr;
+			rear.setLink(node);
+			rear = node;
 		}
 	}
 	//removing the elements from fron end
-  public char removeAtFront(){
+  public String removeAtFront(){
 		if (isEmpty() )
 	    System.out.println("Queue is empty");
-      Node ptr = front;
-      front = ptr.getLink();
+      Node<String> rnode = front;
+      front = rnode.getLink();
       if (front == null)
       	rear = null;
 			  size-- ;
-		  return (char)ptr.getData();
+		  return rnode.getData();
 	}
 	//remove the elements from rear end	
-  public char removeAtRear(){
+  public String removeAtRear(){
 		if (isEmpty())
 			System.out.println("Queue is Empty");
-			char ele = (char)rear.getData();
+			String ele = rear.getData();
 		  Node s = front;
 	    Node t = front;
       while (s != rear){
@@ -93,27 +92,63 @@ public class Deque{
         }
       System.out.println();        
   }
-	//main method to call functions
-	public static void main(String[] args){
-		Deque d = new Deque();
-		System.out.println("Enter String to check Palindrome");
-		String str = u.inputString();
+
+	public boolean isPalindrome(String str){
+		Deque d = new Deque(); 
 		for(int i = 0;i < str.length();i++){
-			d.insertAtRear(str.charAt(i));		
+			if(Character.isLetter(str.charAt(i))){
+				d.insertAtRear(Character.toString(str.charAt(i)));
+				size++;			
+			}
 		}
-		System.out.println("Elements in DQueue left to right");
-		d.display();
-		String str2 = "";
-		System.out.println("Removing elements from same end");
-		for(int i = d.size;i > 0;i--){
-			str2 += d.removeAtRear();
-		}	
-			System.out.println(str2);
-		if(str.equals(str2)){
-		System.out.println("String is Palindrome");
+		//Deque d = new Deque();
+		boolean check = true;
+		int len = str.length();
+		System.out.println("len"+len);
+		//String frontChar = " ";String backChar = " ";
+		
+		if(len % 2 == 0){
+			while(!d.isEmpty() && check){
+				if(d.removeAtFront() != null && d.removeAtRear() != null){
+					String frontChar = d.removeAtFront();
+					String backChar = d.removeAtRear();
+					if(!frontChar.equals(backChar)){
+						return check = false;			
+					}
+				}	
+				return check = true;		
+			}
 		}
 		else{
-		System.out.println("String is Not Palindrome");
+			int index = 0;
+			while((index < ((len - 1)/2)) && (check)){
+				String frontChar = d.removeAtFront();
+				String backChar = d.removeAtRear();
+				if(!frontChar.equals(backChar)){
+					return check = false;				
+				}
+				index++;			
+			}				
+		}	
+		return check; 
+	}	
+	//main method to call functions
+	public static void main(String[] args){
+		Deque d1 = new Deque();
+		String str2 = "";
+		System.out.println("Removing elements from same end");
+		//taking input from user and inserting them from rearEnd
+		System.out.println("Enter String to check Palindrome");
+		//String key = 
+		String str = u.inputString();
+	//	System.out.println("Elements in DQueue left to right");
+		//d1.display();
+		boolean option = d1.isPalindrome(str);
+		if(option){
+			System.out.println("String is Palindrome");		
+		}
+		else{
+			System.out.println("String is not Palindrome");		
 		}
 	}
 	

@@ -6,8 +6,8 @@ package com.bridgelabz;
 **/
 import com.bridgelabz.Utility;
 class LeapYear{
-	public static void main(String [] args){
-		Utility u = new Utility();
+	static Utility u = new Utility();
+	public static void main(String [] args){	
 		LeapYear l = new LeapYear();	
 		System.out.println("Input Year No");
 		int year = u.inputNumber();
@@ -25,6 +25,8 @@ class LeapYear{
 		//checking number contains 4 digits or not?
 		if(count < 4 || count > 4){
 			System.out.println("year should be 4 digits only");
+			year = u.inputNumber();
+			leapYear(year);
 		}
 		//printing leapyer or not
 		else{
