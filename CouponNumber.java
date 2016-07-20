@@ -6,6 +6,7 @@ package com.bridgelabz;
 */
 import com.bridgelabz.Utility;
 import java.util.Random;
+import java.util.ArrayList;
 public class CouponNumber{
 	static Utility u = new Utility();
 	public static void main(String [] args){
@@ -20,10 +21,25 @@ public class CouponNumber{
 		//random class to generate random numbers
 		Random r = new Random();
 		int ran = 0;
+		ArrayList<Integer> al = new ArrayList<Integer>();
 		//for loop for generating random numbers within range
-		for(int i = 1;i <= n;++i){
+		int count = 0;
+		for(int i = 0;i <= n;++i){
 			ran = r.nextInt(50);
-			System.out.println("coupans are: "+ran);
+			if(al.isEmpty()){
+				al.add(ran);
+				count++;			
+			}
+			else{
+				if(al.contains(ran)){
+					count++;				
+				}
+				else
+					al.add(ran);
+					count++;			
+			}
 		}
+		System.out.println(al);
+		System.out.println(count);
 	}
 }
