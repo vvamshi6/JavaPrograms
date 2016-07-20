@@ -22,6 +22,7 @@ public class UnOrderedList{
 		for(int i = 0;i < words.length;i++){
 			add(words[i]);
 		}
+		
 		boolean option;
 		String word1;
 			System.out.println();		
@@ -71,12 +72,7 @@ public class UnOrderedList{
 				default:
 				System.out.println("Number should be 1 to 4");			
 		}
-			
-		//taking a word from user to search in the list
-		
-		
-		
-		//if the word finds then we delete it
+
 		u.writeNodeToFile(start);
 	}
 	
@@ -121,7 +117,7 @@ public class UnOrderedList{
     System.out.print(ptr.getData()+ "\n");
 	}
 	
-	//method to search
+	//search method
 	public static boolean search(String value){
     Node<String> temp=start;
     if(temp==null)
@@ -137,13 +133,13 @@ public class UnOrderedList{
     return false;
   }
 
-	//method to delete
+	//delete method
 	public static void delete(String data){
   	Node<String> temp = start;
   	Node<String> previous = start;
    	Node<String> head = null;
    	if(temp == null){
-     System.out.println("List is empty");
+     	System.out.println("List is empty");
    	}
    	else{
     	while(!data.equals(temp.getData())){

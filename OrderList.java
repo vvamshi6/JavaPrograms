@@ -10,6 +10,7 @@ public class OrderList{
 	static Utility u = new Utility();
 	Node<Integer> start,end;
 	int size;
+	//add method
 	public void add(int val){
 		Node<Integer> node = new Node<Integer>(val,null);    
     size++ ;    
@@ -22,12 +23,12 @@ public class OrderList{
      	end = node;
     }
   }
+	//method to insert elements in order
 	public void insertInOrder(int item){
 		boolean check=false;
 		Node<Integer> n = new Node<Integer>();
 		n.setData(item);
 		Node<Integer> temp,previous = start;
-		Node<Integer> temp1 =start;
 		temp = start;
 		if (temp == null){
 			size++;
@@ -63,24 +64,23 @@ public class OrderList{
 				
 			}
 		}				
-	}//end of insertInOrder()
+	}
+	//display method for Order List
 	public void display(){
 		System.out.println();
     if(size == 0){
       System.out.print("empty\n");
       return;
     }    
-    Node<Integer> ptr = start;        
-		while (ptr!= null){
-    	System.out.print(ptr.getData()+ "->");
-      ptr = ptr.getLink();
-
+    Node<Integer> node = start;        
+		while (node.getLink()!= null){
+    	System.out.print(node.getData()+ "->");
+      node = node.getLink();
     }
-					System.out.println();
-   // System.out.print(ptr.getData()+ "\n");
+		System.out.println(node.getData());
 	}
-	public  boolean search(int srch){
-		    
+	//Search method for ordered List
+	public  boolean search(int srch){    
 		Node<Integer> temp=start;
     if(temp==null)
        return false;
@@ -167,16 +167,23 @@ public class OrderList{
 								System.out.println("option is 1 to 4");
 								break;
 		}
-
+		list.writeNodeToFile(list.start);
 	}
 	public void writeNodeToFile(Node<Integer> node){
 		try{	
-			FileWriter fw = new FileWriter("Ordered.txt");
-			while(node != null){
-      	Integer ndata = (Integer)node.getData();
-				fw.write(ndata);
-				fw.write(",");			
-			}
+		String data = "";
+		Integer ndata;
+		FileWriter fw = new FileWriter("Ordered.txt");
+		fw.write("");		
+		while(node.link != null){
+              	ndata = (Integer)node.getData();
+								data +=	ndata.toString();
+								data +=",";
+              	node=node.link;
+            	}
+			ndata = (Integer)node.getData();
+			data +=	ndata.toString();
+			fw.append(data);
 			fw.close();
 		}
 		catch(Exception ioe){
