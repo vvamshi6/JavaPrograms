@@ -113,23 +113,7 @@ public class Utility{
 		System.out.print("]");	
 	}	
 	
-	//reading file data and making it as a String
- 	public String readFile(String fileName){
-		try{
-			FileInputStream fis = new FileInputStream(fileName);
-           		char ch;
-           		String word="";
-           		while (fis.available() > 0){
-             		ch = (char) fis.read();
-             		word = word+ch;
-           		}
-        	return word;
-		}
-		catch(IOException ioe){
-			System.out.println(ioe);
-		}
-		return null;
-	}
+	
 
 	//reading file data and making it as a string
 	public String getFileText(String fileName){
@@ -278,23 +262,7 @@ public class Utility{
 	}
 
 	//writing node data to the file
-	public  void writeNodeToFile(Node node){
-		try{	
-		String ndata = "";
-		FileWriter fw = new FileWriter("UnOrdered.txt");
-		while(node != null){
-              	ndata += (String)node.getData();
-		ndata +=" ";
-              	node=node.link;
-            	}
-			fw.write(ndata);
-			fw.close();
-		}
-		catch(Exception ioe){
-			System.out.println(ioe);		
-		}
-		System.out.println("data written to file successfully");	
-	}
+	
 
 	//converting string values into integer and then storing in array
 	public int[] convertStringtoInt(String[] nStrings){
@@ -306,4 +274,3 @@ public class Utility{
 		return nums;
 	}
 }
-
